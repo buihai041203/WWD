@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clothing Pro Shop</title>
+  <style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fafafa;
+  color: #333;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 15px 30px;
+  border-bottom: 2px solid #7fc7d5;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #7fc7d5;
+}
+nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+nav a:hover {
+  color: #7fc7d5;
+}
+
+/* Banner */
+.banner {
+  background: linear-gradient(to right, #e0f6fa, #ffffff);
+  text-align: center;
+  padding: 30px 10px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #7fc7d5;
+}
+
+/* Layout */
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* Filter */
+.filter {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 0 0 15%;
+  border: 1px solid #7fc7d5;
+  height: fit-content;
+}
+.filter h3 {
+  color: #7fc7d5;
+  margin-bottom: 15px;
+}
+.filter label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+.filter input {
+  width: 90%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.filter select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+/* Product list */
+.product-list {
+  flex: 0 0 75%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+.product-card {
+  background: #fff;
+  border: 1px solid #7fc7d5;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+}
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.product-info {
+  padding: 15px;
+}
+.product-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.product-brand {
+  color: gray;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.product-price {
+  font-weight: bold;
+  color: #7fc7d5;
+  margin-bottom: 10px;
+}
+.product-actions {
+  display: flex;
+  gap: 10px;
+}
+.btn {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+.btn-add {
+  background: #7fc7d5;
+  color: white;
+}
+.btn-add:hover {
+  background: #5fb5c6;
+}
+.btn-detail {
+  background: #ccc;
+}
+.btn-detail:hover {
+  background: #bbb;
+}
+.profile-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fff;
+      text-align: center;
+    }
+    .profile-container h2 {
+      margin-bottom: 20px;
+    }
+    .profile-info {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    .profile-info p {
+      margin: 8px 0;
+    }
+    .btn {
+      padding: 10px 20px;
+      background: #007bff;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #0056b3;
+    }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">👕 Clothing Pro Shop</div>
+  <nav>
+    <a href="homepage.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html" id="cart-btn">Cart (<span id="cart-count">0</span>)</a>
+    <a href="profile.html">Profile</a>
+  </nav>
+</header>
+
+<div class="banner">Find stylish and quality clothing</div>
+
+<div class="profile-container">
+    <h2>User Profile</h2>
+    <div class="profile-info">
+      <p><strong>Full Name:</strong> <span id="profileName"></span></p>
+      <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+    </div>
+    <button class="btn" id="logoutBtn">Logout</button>
+  </div>
+
+  <script>
+    // Kiểm tra trạng thái đăng nhập
+    window.onload = function() {
+      if (localStorage.getItem('isLoggedIn') !== 'true') {
+        alert('You must log in to view your profile.');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Hiển thị thông tin
+      document.getElementById('profileName').textContent = localStorage.getItem('username') || 'N/A';
+      document.getElementById('profileEmail').textContent = localStorage.getItem('email') || 'N/A';
+    };
+
+    // Đăng xuất
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      localStorage.setItem('isLoggedIn', 'false');
+      alert('You have been logged out.');
+      window.location.href = 'login.html';
+    });
+  </script>
+
+
+<script src="products.js"></script>
+</body>
+</html>
